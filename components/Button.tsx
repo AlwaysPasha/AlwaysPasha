@@ -11,14 +11,17 @@ type ButtonProps = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 will-change-transform";
+  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300";
 
 const variants: Record<string, string> = {
   primary:
-    "bg-ink text-white hover:bg-white hover:text-ink border border-ink hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10",
+    "bg-orange-500 text-white border border-orange-500 hover:bg-orange-600 hover:border-orange-600 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/25",
+
   secondary:
-    "bg-white text-ink border border-border hover:border-ink hover:-translate-y-0.5",
-  ghost: "text-ink hover:opacity-60",
+    "bg-zinc-900/60 text-white border border-zinc-700 backdrop-blur-md hover:bg-zinc-800 hover:border-zinc-500 hover:-translate-y-1",
+
+  ghost:
+    "text-zinc-300 hover:text-white",
 };
 
 export default function Button({
