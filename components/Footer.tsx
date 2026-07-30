@@ -1,19 +1,33 @@
-import Aperture from "./Aperture";
+import { Heart } from "lucide-react";
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-border bg-white">
-      <div className="mx-auto flex max-w-content flex-col items-center gap-4 container-px py-10 text-sm text-muted sm:flex-row sm:justify-between">
-        <div className="flex items-center gap-2">
-          <Aperture className="h-4 w-4 text-ink/40" />
-          <span>
-            © {year} <span className="text-ink/40">Always</span>
-            <span className="font-semibold text-ink">Pasha</span>
-          </span>
+    <footer className="border-t border-border py-10">
+      <div className="mx-auto flex max-w-content flex-col items-center justify-between gap-6 px-6 text-center md:flex-row md:text-left">
+
+        <div>
+          <h3 className="text-lg font-semibold gradient-text">
+            AlwaysPasha
+          </h3>
+
+          <p className="mt-2 text-sm text-muted">
+            Securing Systems. Automating Workflows. Capturing Perspectives.
+          </p>
         </div>
-        <span>Built with Next.js</span>
+
+        <div className="text-sm text-muted">
+          <p>© 2026 Pasha. All rights reserved.</p>
+
+          <p className="mt-2 flex items-center justify-center gap-1 md:justify-end">
+            Designed & Built with
+            <span className="font-medium text-white">Next.js</span>
+            <Heart
+              size={14}
+              className="fill-red-500 text-red-500"
+            />
+          </p>
+        </div>
+
       </div>
     </footer>
   );

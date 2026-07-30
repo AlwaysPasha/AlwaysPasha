@@ -1,66 +1,100 @@
-import Aperture from "./Aperture";
-
-const roles = [
-  {
-    title: "AI Builder",
-    description:
-      "Designing and shipping AI-powered tools that turn complex models into products people actually use.",
-  },
-  {
-    title: "Automation Developer",
-    description:
-      "Wiring up smart automations that remove repetitive work and let systems run themselves.",
-  },
-  {
-    title: "Web Developer",
-    description:
-      "Crafting fast, clean interfaces with modern web tooling — from idea to production.",
-  },
-  {
-    title: "Part-time Photographer",
-    description:
-      "Framing the world through a lens when I'm away from the keyboard — light, timing, and detail.",
-  },
-];
+import Image from "next/image";
+import Reveal from "./Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="section border-t border-border bg-white">
-      <div className="mx-auto max-w-content container-px">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-[0.9fr_1.1fr] md:gap-20">
-          <div>
-            <p className="eyebrow mb-5">
-              <Aperture className="h-4 w-4" />
-              About
+    <section id="about" className="section-padding py-28 sm:py-36">
+      <div className="mx-auto grid max-w-content items-center gap-16 lg:grid-cols-[0.9fr_1.1fr]">
+
+        {/* Profile Image */}
+        <Reveal>
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm">
+            <div
+              className="absolute -inset-4 rounded-[32px] bg-accent-gradient opacity-20 blur-3xl"
+              aria-hidden="true"
+            />
+
+            <div className="glass-card relative h-full overflow-hidden rounded-[28px] border border-border">
+              <Image
+                src="/photos/profile.png"
+                alt="Portrait of Pasha"
+                fill
+                priority
+                sizes="(min-width:1024px) 380px, 80vw"
+                className="object-cover transition-transform duration-700 hover:scale-105"
+              />
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Content */}
+        <Reveal delay={100}>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-muted">
+            About Me
+          </p>
+
+          <h2 className="text-3xl font-bold tracking-tight sm:text-5xl">
+            Hi, I'm{" "}
+            <span className="gradient-text">
+              Pasha
+            </span>
+          </h2>
+
+          <div className="mt-8 space-y-6 text-lg leading-8 text-muted">
+
+            <p>
+              I'm passionate about SAP Security, AI automation, cloud
+              technologies, and building practical digital solutions that solve
+              real-world problems.
             </p>
-            <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl md:text-[2.75rem]">
-              Hi, I&apos;m Pasha.
-            </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-muted md:text-lg">
-              I sit at the intersection of AI and automation — building
-              practical tools that quietly make everyday work easier. When
-              I&apos;m not building, I&apos;m usually behind a camera, looking
-              for the same kind of clarity in a frame that I look for in
-              code.
+
+            <p>
+              I enjoy continuously learning new technologies, improving my
+              technical skills, and exploring innovative ways to combine
+              security, automation, and cloud computing into meaningful
+              projects.
             </p>
+
+            <p>
+              Beyond technology, photography is my creative outlet. It allows
+              me to slow down, observe details, and tell stories through images
+              while constantly exploring new perspectives.
+            </p>
+
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {roles.map((role) => (
-              <div
-                key={role.title}
-                className="group rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ink/30 hover:bg-white hover:shadow-xl hover:shadow-ink/5"
-              >
-                <h3 className="font-display text-lg font-semibold text-ink">
-                  {role.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {role.description}
-                </p>
-              </div>
-            ))}
+          {/* Stats */}
+          <div className="mt-10 grid grid-cols-3 gap-5">
+
+            <div className="glass-card rounded-2xl p-5 text-center">
+              <h3 className="text-3xl font-bold gradient-text">
+                SAP
+              </h3>
+              <p className="mt-2 text-sm text-muted">
+                Security
+              </p>
+            </div>
+
+            <div className="glass-card rounded-2xl p-5 text-center">
+              <h3 className="text-3xl font-bold gradient-text">
+                AI
+              </h3>
+              <p className="mt-2 text-sm text-muted">
+                Automation
+              </p>
+            </div>
+
+            <div className="glass-card rounded-2xl p-5 text-center">
+              <h3 className="text-3xl font-bold gradient-text">
+                AWS
+              </h3>
+              <p className="mt-2 text-sm text-muted">
+                Cloud
+              </p>
+            </div>
+
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,6 +1,8 @@
 # AlwaysPasha
 
-Premium personal portfolio for Pasha — AI Builder, Automation Developer, Web Developer, and part-time photographer. Built with Next.js 16 (App Router), TypeScript, and Tailwind CSS.
+Premium, minimal personal portfolio for Pasha — SAP Security, AI Automation,
+Cloud Technologies, Business Systems, and Photography. Built with Next.js 16
+(App Router), TypeScript, and Tailwind CSS.
 
 ## Getting started
 
@@ -16,34 +18,55 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 alwayspasha/
 ├── app/
-│   ├── globals.css      # Tailwind base + design tokens (colors, spacing rhythm)
-│   ├── layout.tsx        # Fonts, metadata, root HTML shell
-│   └── page.tsx          # Assembles all sections
+│   ├── globals.css      # Tailwind base + design tokens, glass-card & gradient-text utilities
+│   ├── layout.tsx        # Inter font, SEO metadata, root HTML shell
+│   └── page.tsx          # Assembles the six homepage sections
 ├── components/
-│   ├── Navbar.tsx         # Sticky nav, mobile menu, CTA
-│   ├── Hero.tsx           # Headline, blob, aperture motif, CTAs
-│   ├── About.tsx          # Intro + four role cards
-│   ├── Projects.tsx       # Project cards (image, tags, links)
-│   ├── Skills.tsx         # Skills grid
-│   ├── Contact.tsx        # Email / LinkedIn / GitHub + CTA
-│   ├── Footer.tsx         # Copyright + credit
-│   ├── Aperture.tsx       # Shared signature icon (camera-iris motif)
-│   └── Button.tsx         # Shared CTA button
+│   ├── Navbar.tsx         # Sticky nav with mobile menu (UI chrome, not a page section)
+│   ├── Hero.tsx           # Headline, gradient blobs, grid backdrop, entrance animation
+│   ├── Expertise.tsx      # Five glassmorphism cards (AI, SAP Security, Cloud, Business, Photography)
+│   ├── Gallery.tsx        # Masonry photo grid with lazy loading + keyboard-accessible lightbox
+│   ├── About.tsx          # Bio + profile image
+│   ├── Contact.tsx        # Validated contact form with animated send state
+│   ├── Footer.tsx         # Minimal copyright line
+│   ├── Reveal.tsx         # Scroll-triggered fade-in wrapper (IntersectionObserver, no extra deps)
+│   └── Aperture.tsx       # Shared aperture-iris signature motif (security ⨯ photography)
 └── public/
 ```
 
 ## Design notes
 
-- **Palette:** pure monochrome — near-black `#0A0A0A` ink on white, with
-  grayscale surface/border/muted tones. No color accent anywhere.
-- **Type:** Space Grotesk for display headings, Inter for body/UI text.
-- **Signature motif:** a rotating aperture-blade icon used as the eyebrow icon,
-  hero backdrop, and project placeholder — a visual nod to Pasha being both a
-  builder and a photographer.
-- **Signature interaction:** small circular marks (skills, contact channels)
-  and the primary button invert from solid black to hollow white on hover —
-  the one recurring piece of motion-as-feedback in an otherwise quiet, static
-  layout.
+- **Palette:** near-black `#09090B` background, `#111827` glass cards,
+  hairline `rgba(255,255,255,0.08)` borders, and a purple → blue
+  (`#7C3AED → #2563EB`) gradient used for headline accents, buttons, and glow.
+- **Type:** Inter throughout, leaning on weight and tracking rather than
+  multiple families to keep the page quiet and premium.
+- **Signature motif:** a rotating aperture-blade icon (see `Aperture.tsx`)
+  appears once in the Hero as a quiet nod to Pasha being both a security/AI
+  builder and a photographer — the one deliberately "extra" visual element.
+- **Motion:** staggered fade-ins on load (Hero) and on scroll (`Reveal.tsx`
+  everywhere else), card hover-lift, image hover-zoom, and button hover-glow.
+  `prefers-reduced-motion` is respected globally.
+
+## Swapping in your own photos
+
+`components/Gallery.tsx` and `components/About.tsx` currently use
+[picsum.photos](https://picsum.photos) placeholders. To use real photos:
+
+1. Drop your images into `/public/photos/`.
+2. In `Gallery.tsx`, replace each `src={\`https://picsum.photos/seed/...\`}`
+   with `src="/photos/your-file.jpg"`.
+3. Update the `alt` text for each photo.
+4. If you keep using an external image host instead, add its domain to
+   `images.remotePatterns` in `next.config.ts`.
+
+## Wiring up the contact form
+
+The form in `Contact.tsx` validates client-side and simulates a send so the
+UI is fully functional out of the box. To actually deliver messages, replace
+the `setTimeout` in `handleSubmit` with a call to your provider of choice
+(a Next.js API route + [Resend](https://resend.com), 
+[Formspree](https://formspree.io), etc).
 
 ## Deploying to Vercel
 

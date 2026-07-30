@@ -1,45 +1,36 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
+import ScrollProgress from "@/components/ScrollProgress";
+import CursorGlow from "@/components/CursorGlow";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-sans",
+  variable: "--font-inter",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "AlwaysPasha — Building Products That Make Life Simpler",
+  title: "Pasha — Security, AI & Cloud Builder",
   description:
-    "Pasha is an AI builder and automation developer crafting AI-powered tools and smart automations that solve real-world problems. Also a part-time photographer.",
-  keywords: [
-    "AlwaysPasha",
-    "Pasha",
-    "AI Builder",
-    "Automation Developer",
-    "Web Developer",
-    "Portfolio",
-  ],
+    "Pasha builds secure systems, AI-powered automation, and modern digital experiences across SAP Security, cloud infrastructure, and business systems.",
+  metadataBase: new URL("https://alwayspasha.com"),
+  openGraph: {
+    title: "Pasha — Security, AI & Cloud Builder",
+    description:
+      "Building secure systems, AI solutions & modern digital experiences.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${spaceGrotesk.variable} ${inter.variable} bg-bg text-ink antialiased`}
-      >
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans">
+        <ScrollProgress />
+        <CursorGlow />
         {children}
       </body>
     </html>

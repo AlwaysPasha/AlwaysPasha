@@ -1,44 +1,50 @@
-type ApertureProps = {
+interface ApertureProps {
   className?: string;
-  spin?: boolean;
-};
+  size?: number;
+}
 
 /**
- * The aperture motif is AlwaysPasha's signature element: thin rotating
- * blades that read as a camera iris (Pasha's photography side) while
- * doubling as a precise, mechanical accent (his engineering side).
- * Used sparingly — hero backdrop, section eyebrows, section dividers.
+ * Signature motif: a camera-aperture iris rendered from gradient-stroked
+ * blades. Echoes both "security" (an iris that opens/closes on trust) and
+ * "photography" (an actual aperture) — the one recurring graphic element
+ * used across the Hero and Gallery sections.
  */
-export default function Aperture({ className = "", spin = false }: ApertureProps) {
-  const blades = Array.from({ length: 8 });
+export default function Aperture({ className = "", size = 120 }: ApertureProps) {
+  const blades = 6;
+  const radius = size / 2;
 
   return (
     <svg
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`${spin ? "animate-spinSlow" : ""} ${className}`}
+      viewBox="0 0 120 120"
+      width={size}
+      height={size}
+      className={className}
       aria-hidden="true"
     >
-      <circle cx="50" cy="50" r="48" stroke="currentColor" strokeOpacity="0.15" strokeWidth="1" />
-      {blades.map((_, i) => {
-        const angle = (360 / blades.length) * i;
-        return (
-          <line
-            key={i}
-            x1="50"
-            y1="50"
-            x2="50"
-            y2="8"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            transform={`rotate(${angle} 50 50)`}
-            opacity={0.4}
-          />
-        );
-      })}
-      <circle cx="50" cy="50" r="6" fill="currentColor" opacity="0.6" />
+      <defs>
+        <linearGradient id="apertureGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#7C3AED" />
+          <stop offset="100%" stopColor="#2563EB" />
+        </linearGradient>
+      </defs>
+      <g transform={`translate(${radius}, ${radius})`}>
+        {Array.from({ length: blades }).map((_, i) => {
+          const angle = (360 / blades) * i;
+          return (
+            <path
+              key={i}
+              d="M0,0 L0,-50 A50,50 0 0,1 21.65,-45.32 Z"
+              fill="none"
+              stroke="url(#apertureGradient)"
+              strokeWidth="1.4"
+              strokeLinejoin="round"
+              opacity={0.55}
+              transform={`rotate(${angle})`}
+            />
+          );
+        })}
+        <circle r="14" fill="none" stroke="url(#apertureGradient)" strokeWidth="1.4" opacity="0.8" />
+      </g>
     </svg>
   );
 }
