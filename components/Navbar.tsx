@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
-  { href: "#expertise", label: "Expertise" },
-  { href: "#gallery", label: "Gallery" },
   { href: "#about", label: "About" },
+  { href: "#projects", label: "Projects" },
+  { href: "#photography", label: "Photography" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -23,12 +25,20 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-        scrolled ? "border-b border-border bg-bg/70 backdrop-blur-xl" : "bg-transparent"
+        scrolled ? "border-b border-line bg-bg/85 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <nav className="section-padding mx-auto flex max-w-content items-center justify-between py-4">
-        <a href="#home" className="text-[15px] font-semibold tracking-tight">
-          Pasha
+      <nav className="section-padding mx-auto flex max-w-content items-center justify-between py-5">
+        <a
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="text-[15px] font-semibold tracking-tight"
+        >
+          <span className="text-ink">Always</span>
+          <span className="text-muted">Pasha</span>
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
@@ -36,50 +46,41 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted transition-colors hover:text-white"
+              className="text-sm text-muted transition-colors hover:text-ink"
             >
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="rounded-full bg-accent-gradient px-5 py-2 text-sm font-medium text-white transition-shadow duration-300 hover:shadow-[0_0_24px_-4px_rgba(124,58,237,0.6)]"
-          >
-            Get In Touch
-          </a>
+          <ThemeToggle />
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="text-white md:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-8 w-8 items-center justify-center text-ink"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
       {open && (
-        <div className="border-t border-border bg-bg/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-line bg-bg md:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-2 py-3 text-[15px] text-muted transition-colors hover:bg-white/5 hover:text-white"
+                className="rounded-md px-2 py-3 text-[15px] text-muted transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-full bg-accent-gradient px-5 py-3 text-center text-[15px] font-medium text-white"
-            >
-              Get In Touch
-            </a>
           </div>
         </div>
       )}

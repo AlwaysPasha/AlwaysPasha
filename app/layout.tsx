@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ScrollProgress from "@/components/ScrollProgress";
-import CursorGlow from "@/components/CursorGlow";
+import { themeInitScript } from "@/lib/theme-script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,14 +10,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Pasha — Security, AI & Cloud Builder",
+  title: "AlwaysPasha — Pasha",
   description:
-    "Pasha builds secure systems, AI-powered automation, and modern digital experiences across SAP Security, cloud infrastructure, and business systems.",
+    "Pasha — working across SAP Security, AI Automation, and AWS Cloud, with a focus on secure systems, intelligent automation, and practical technology.",
   metadataBase: new URL("https://alwayspasha.com"),
   openGraph: {
-    title: "Pasha — Security, AI & Cloud Builder",
+    title: "AlwaysPasha — Pasha",
     description:
-      "Building secure systems, AI solutions & modern digital experiences.",
+      "Working across SAP Security, AI Automation, and AWS Cloud, with a focus on secure systems, intelligent automation, and practical technology.",
     type: "website",
   },
 };
@@ -27,10 +26,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans">
-        <ScrollProgress />
-        <CursorGlow />
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="font-sans" suppressHydrationWarning>
         {children}
       </body>
     </html>
